@@ -14,8 +14,12 @@
         </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
-        <a href="/login" class="btn btn-info standard-btn-width btn-sm" type="button"><i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp; Login</a> &nbsp;
-          <a href="/register" class="btn second-bg-color standard-btn-width text-light btn-sm" type="button"><i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp; Register</a> &nbsp;
+          <% if(!islogin){ %>
+            <a href="/login" class="btn btn-info standard-btn-width btn-sm" type="button"><i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp; Login</a> &nbsp;
+            <a href="/register" class="btn second-bg-color standard-btn-width text-light btn-sm" type="button"><i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp; Register</a> &nbsp;
+        <% }else{ %>
+            <a href="/logout" class="btn second-bg-color btn-sm text-light" type="button"><i class="fa fa-user" aria-hidden="true"></i> &nbsp;<%= user.email %> | Logout</a> &nbsp;
+        <% } %>
       </div>
     </div>
   </nav>

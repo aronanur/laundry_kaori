@@ -4,18 +4,18 @@
     <div class="col-md-8 mx-auto">
         <h1 class="text-center main-color"><b>Kaori</b> Laundry | Register</h1>
         <br>
-        <form action="/login" method="POST">
+        <form action="/register" method="POST">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nama</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Masukan nama lengkap" name="name" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan nama lengkap" name="name" aria-describedby="emailHelp">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Masukan email" name="email" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan email" name="email" aria-describedby="emailHelp">
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputPassword1">Jenis Kelamin</label>
-                        <select class="form-control">
+                        <select name="gender" class="form-control">
                             <option value="">--- Pilih Jenis Kelamin ---</option>
                             <option value="Pria">Pria</option>
                             <option value="Wanita">Wanita</option>
@@ -55,7 +55,12 @@
             <label for="exampleInputPassword1">Alamat</label>
             <textarea class="form-control" name="address" placeholder="Masukan alamat lengkap"></textarea>
             </div>
-            <p style="text-indent: 2px;" class="basic-color"><%= messages.error %></p>
+            <ul style="list-style: none;">
+                <% if(messages.error){ 
+                    messages.error.map(err => {%>
+                    <li class="text-danger"><%= err %></li>
+                <% })} %>
+                </ul>
             <button type="submit" style="width: 49%;" class="btn text-light main-bg-color mt-2"><i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp;Register</button>
             <button type="reset" style="width: 49%;" class="btn text-light second-bg-color mt-2"><i class="fa fa-repeat" aria-hidden="true"></i> &nbsp;Reset</button>
             <p class="text-center pt-3"><a style="text-decoration: none; font-size: 13px;" href="/login">Sudah Punya Akun ? Silahkan Login</a></p>

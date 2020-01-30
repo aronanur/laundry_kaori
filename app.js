@@ -14,10 +14,11 @@ app.locals.formatTanggal =require('./helper/formatTanggal')
 app.use(flash())
 app.use(cookieParser('keyboard cat'))
 app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-  }))
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+}))
+app.locals.user = ''
 app.set('view engine', 'ejs')
 app.use('/', userRoutes)
 
