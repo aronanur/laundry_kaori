@@ -1,11 +1,29 @@
 
 <%- include('layouts/header') %>
-<%- include('layouts/navbar') %>
+<%- include('layouts/navbar', { islogin : isLogin }) %>
 <%- include('layouts/jumbotron') %>
 
 <h2 class="text-center">Pilih paket laundry yang kamu mau</h2>
 <br>
 <div class="col-md-8 mx-auto">
+    <% if(messages.error) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= messages.error %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <br>
+    <% } %>
+    <% if(status) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <%= status %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <br>
+    <% } %>
     <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Cari berdasarkan nama paket" aria-label="Recipient's username" aria-describedby="basic-addon2">
         <div class="input-group-append">
@@ -15,7 +33,7 @@
       <br>
 
       <div class="col-md-12">
-          <p>Paket Terbaik Kami : </p>
+          <p>Paket Terbaik Kami : <%= isLogin %></p>
           <div class="row">
               <div class="col-md-3">
                 <div class="card">
