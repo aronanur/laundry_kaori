@@ -193,9 +193,86 @@ class UserController {
       }
     }
 
-    // static cartList(req, res){
-    //   Category
-    // }
+    static cartList(req, res){
+      let UserId = req.params.id
+      let status = req.query.status
+
+      Transaction
+        .findAll({
+          include : [User, Category],
+          where : {
+            UserId : UserId
+          }
+        })
+        .then(response => {
+          res.render('user/cartList', { pakets : response, isLogin : req.session.isLogin, status })
+          // res.send(response)
+        })
+        .catch(err => {
+          res.send(err)
+        })
+    }
+
+    static updateDatapage(req, res){
+      let payCode = req.params.payCode
+      let status = req.query.status
+
+      Transaction
+        .findOne({
+          where : {
+            pay_code : payCode
+          }
+        })
+        .then(response => {
+          // res.send(response)
+          res.render('user/editDataTransaksi', { paket : response, isLogin : req.session.isLogin, status })
+        })
+        .catch(err => {
+          res.send(err)
+        })
+    }
+
+    static updateDataTransaksi(req, res){
+      let pay_code = req.params.payCode
+      let objValue = {
+        CategoryId : req.params.CategoryId,
+        qty : req.body.qty,
+        notes : req.body.notes,
+        pay_code : pay_code,
+        total_price : 0
+      }
+      
+      Transaction
+        .update(objValue, {
+          where : {
+            pay_code : pay_code
+          },
+          individualHooks: true
+        })
+        .then(response => {
+          req.flash('success', 'Berhasil update data!')
+          res.redirect('/laundry/carts/'+req.session.user.id)
+        })
+        .catch(err => {
+          res.send(err)
+        })
+    }
+
+    static deleteDataTransaksi(req, res){
+      Transaction
+        .destroy({
+          where : {
+            pay_code : req.params.payCode
+          }
+        })
+        .then(response => {
+          req.flash('success', 'Berhasil hapus data!')
+          res.redirect('/laundry/carts/'+req.session.user.id)
+        })
+        .catch(err => {
+          res.send(err)
+        })
+    }
 }
 
 module.exports = UserController
