@@ -8,8 +8,10 @@ const alreadyLogin = require('../middlewares/alreadyLogin')
 const isAdmin = require('../middlewares/isAdmin')
 
 router.get('/', (req, res) => {
-    res.send('homeeee')
+    // res.send('homeeee
+    res.render('admin/homeAdmin')
 })
+
 // router.get('/logout', AdminController.doLogout)
 // router.get('/login', alreadyLogin, AdminController.loginPage)
 // router.post('/login', alreadyLogin, AdminController.doLogin)
