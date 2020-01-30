@@ -1,0 +1,47 @@
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.main-bg-color {
+    background-color: #0770cd;
+}
+
+.main-color {
+    color: #0770cd;
+}
+
+.active  {
+    font-weight: bold;
+}
+
+.second-color {
+    color : #ff5252
+}
+
+.second-bg-color {
+    background-color: #ff5252;
+}
+
+.second-outline-bg-color {
+    background-color: transparent;
+    border: 1px solid #ff5252;
+}
+
+.standard-btn-width {
+    width: 100px;
+}
+
+.banner {
+    background-image: url('../image/banner.jpg');
+    background-size: cover;
+}
+
+.card-text {
+    display: block;
+    font-size: 12px;
+    padding: -5px;
+}
+
+.card-btn {
+    width: 65px;
+}
