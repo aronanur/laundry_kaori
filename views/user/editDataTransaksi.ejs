@@ -1,0 +1,21 @@
+<%- include('layouts/header') %>
+<%- include('layouts/navbar', { islogin : isLogin }) %>
+<br>
+<h2 class="text-center">Update Data Transaksi</h2>
+<br>
+<div class="col-md-6 mx-auto">
+    <form action="/laundry/updateDataTransaksi/<%= paket.pay_code %>/<%= paket.CategoryId %>" method="POST">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Quantity</label>
+            <input type="number" class="form-control" value="0" value="<%= paket.qty %>" placeholder="Quantity" name="qty" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Pesan</label>
+                <textarea class="form-control" rows="6" name="notes" placeholder="Masukan pesan tambahan kepada toko"><%= paket.notes %></textarea>
+        </div>
+        <button type="submit" class="btn btn-warning text-light">Update</button>
+      </form>
+</div>
+<br>
+
+<%- include('layouts/footer') %>

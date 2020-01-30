@@ -64,7 +64,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeCreate: (instance, options) => {
-        console.log(instance)
         let start_date = new Date()
         return Category
         .findByPk(instance.CategoryId)
@@ -75,6 +74,13 @@ module.exports = (sequelize, DataTypes) => {
             // console.log(instance.end_date)
             console.log(instance.qty * category.price, category.price, instance.qty)
             instance.total_price = (instance.qty * category.price)
+          })
+      },
+      beforeUpdate : (instance, options) => {
+        return Category
+          .findByPk(instance.CategoryId)
+          .then(response => {
+            instance.total_price = instance.qty * response.price
           })
       }
     }, sequelize
