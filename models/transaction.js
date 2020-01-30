@@ -60,7 +60,8 @@ module.exports = (sequelize, DataTypes) => {
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,
     pay_code: DataTypes.STRING,
-    notes: DataTypes.STRING
+    notes: DataTypes.STRING,
+    invoice: DataTypes.TEXT
   }, {
     hooks: {
       beforeCreate: (instance, options) => {
@@ -72,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
             instance.pay_code = Helper.generatePayCode(instance.CategoryId)
             instance.end_date = new Date(start_date.setDate(start_date.getDate() + category.duration))
             // console.log(instance.end_date)
-            console.log(instance.qty * category.price, category.price, instance.qty)
+            // console.log(instance.qty * category.price, category.price, instance.qty)
             instance.total_price = (instance.qty * category.price)
           })
       },

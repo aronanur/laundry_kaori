@@ -1,28 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-dark main-bg-color">
-    <a class="navbar-brand text-bold" href="/">Kaori Laundry</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse ml-2" id="navbarTogglerDemo02">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/">Beranda</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/laundry/list">Paket Laundry</a>
-        </li>
-      </ul>
-      <div class="form-inline my-2 my-lg-0">
-          <% if(!islogin){ %>
-            <a href="/login" class="btn btn-info standard-btn-width btn-sm" type="button"><i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp; Login</a> &nbsp;
-            <a href="/register" class="btn second-bg-color standard-btn-width text-light btn-sm" type="button"><i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp; Register</a> &nbsp;
-        <% }else{ %>
-          <a href="/laundry/carts/<%= user.id %>" class="btn orange-bg-color text-light btn-sm card-btn" type="button"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a> &nbsp;
-            <a href="/logout" class="btn second-bg-color btn-sm text-light" type="button"><i class="fa fa-user" aria-hidden="true"></i> &nbsp;<%= user.email %> | Logout</a> &nbsp;
-        <% } %>
-      </div>
+  <a class="navbar-brand text-bold" href="/">Kaori Laundry</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse ml-2" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/">Beranda</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/laundry/list">Paket Laundry</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/admins">Admin</a>
+      </li>
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <% if(!islogin){ %>
+      <a href="/login" class="btn btn-info standard-btn-width btn-sm" type="button"><i class="fa fa-sign-in"
+          aria-hidden="true"></i> &nbsp; Login</a> &nbsp;
+      <a href="/register" class="btn second-bg-color standard-btn-width text-light btn-sm" type="button"><i
+          class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp; Register</a> &nbsp;
+      <% }else{ %>
+      <a href="/laundry/carts/<%= user.id %>" class="btn orange-bg-color text-light btn-sm card-btn" type="button"> <i
+          class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a> &nbsp;
+      <a href="/logout" class="btn second-bg-color btn-sm text-light" type="button"><i class="fa fa-user"
+          aria-hidden="true"></i> &nbsp;<%= user.email %> | Logout</a> &nbsp;
+      <% } %>
     </div>
-  </nav>
+  </div>
+</nav>
 
 <div style="min-height: 85vh;">
