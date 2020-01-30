@@ -2,6 +2,8 @@ const { User, Category, Parfume, Transaction } = require('../models/index')
 const Operator = require('sequelize').Sequelize.Op
 const Helper = require('../helper/helper')
 const bcrypt = require('bcryptjs')
+const nodemailer = require('nodemailer')
+const mailSetup = require('../helper/mailSetup')
 
 class UserController {
 
@@ -76,11 +78,28 @@ class UserController {
         User
           .create(objValue)
           .then(response => {
+            mailSetup
+                  // setup email data with unicode symbols
+            let mailOptions = {
+              from: '"Nodemailer Contact" <kaorilaundry8@email.com>', // sender address
+              to: 'arona.nur.tetulis@gmail.com', // list of receivers
+              subject: 'Tes', // Subject line
+              text: 'Hello world?', // plain text body
+              html: 'tes email' // html body
+            };
+            // send mail with defined transport object
+            mailSetup.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: %s', info.messageId);
+                console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+              //   res.render('contact', {msg:'Email has been sent'});
+            });
             req.flash('success', 'Sukses membuat akun Kaori Laundry')
             res.redirect('/login')
           })
           .catch(err => {
-            res.send(err)
             req.flash('error', Helper.formValidator(err.errors))
             res.redirect('/register')
           })
@@ -206,7 +225,6 @@ class UserController {
         })
         .then(response => {
           const checkoutValidasi = Helper.checkoutValidasi(response)
-          console.log(checkoutValidasi)
           res.render('user/cartList', { pakets : response, isLogin : req.session.isLogin, status, rows : checkoutValidasi })
           // res.send(response)
         })
