@@ -14,7 +14,6 @@ module.exports = {
     */
     return queryInterface.bulkInsert('Transactions', [
       {
-        id: 1,
         UserId: 1,
         CategoryId: 1,
         status: 'belum di proses',
@@ -26,7 +25,6 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        id: 2,
         UserId: 1,
         CategoryId: 2,
         status: 'belum di proses',
@@ -38,7 +36,6 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        id: 3,
         UserId: 2,
         CategoryId: 1,
         status: 'belum di proses',

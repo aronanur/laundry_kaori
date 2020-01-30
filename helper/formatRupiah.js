@@ -11,7 +11,7 @@ function formatRupiah(number) {
         }
     }
     let toConvert = stringReverse.split('').reverse().join('')
-    return `Rp.${toConvert},00`
+    return `Rp. ${toConvert}`
 }
 // console.log(convertToRupiah(1200000))
 module.exports = formatRupiah

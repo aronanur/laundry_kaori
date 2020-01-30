@@ -4,8 +4,8 @@ const port = 5000
 const flash = require('express-flash')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-const routerAdmin = require('./routes/adminRoutes')
-const userRoutes = require('./routes/userRoutes')
+const adminRoutes = require('./routes/adminRoutes')
+// const userRoutes = require('./routes/userRoutes')
 app.use(express.static('assets'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -20,9 +20,9 @@ app.use(session({
 }))
 app.locals.user = ''
 app.set('view engine', 'ejs')
-app.use('/', userRoutes)
+// app.use('/', userRoutes)
 
-app.use('/admins', routerAdmin)
+app.use('/admins', adminRoutes)
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
 })

@@ -9,8 +9,25 @@ router.get('/', (req, res) => {
 })
 
 router.get('/listTransactions', (req, res) => {
-    // res.send('ini ke list transaksi')
-    adminController.listTransactions(req,res)
+    adminController.listTransactions(req, res)
+})
+router.get('/filter?',(req,res)=>{
+    res.send('ini filter')
+})
+
+router.get('/editTransaction/:pay_code', (req, res) => {
+   
+    adminController.showFormEditTransaction(req,res)
+})
+router.post('/editTransaction/:pay_code', (req, res) => {
+   
+    adminController.editTransaction(req,res)
+})
+
+router.get('/deleteTransaction/:pay_code',(req,res)=>{
+    // res.send('ini delete trans')
+    adminController.deleteTransaction(req,res)
+    
 })
 
 router.get('/addCategory', (req, res) => {
@@ -28,7 +45,7 @@ router.post('/editCategory/:CategoryId', (req, res) => {
 })
 
 router.get('/delete/:CategoryId', (req, res) => {
-    res.send('ini delete yg udah')
+    res.send('ini delete aja')
 })
 
 module.exports = router
