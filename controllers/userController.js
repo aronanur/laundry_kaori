@@ -5,8 +5,18 @@ const bcrypt = require('bcryptjs');
 class UserController {
 
     static homePage(req, res){
+      
       let status = req.query.status
-        res.render('user/home', { isLogin : req.session.isLogin, status })
+
+      Category
+        .findAll()
+        .then(response => {
+          res.render('user/home', { isLogin : req.session.isLogin, status, pakets : response })
+        })
+        .catch(err => {
+          res.send(err)
+        })
+
     }
 
     static loginPage(req, res){
@@ -66,6 +76,7 @@ class UserController {
             res.redirect('/login')
           })
           .catch(err => {
+            res.send(err)
             req.flash('error', Helper.formValidator(err.errors))
             res.redirect('/register')
           })
@@ -79,8 +90,19 @@ class UserController {
           })
     }
 
+    static addTransactionsPage(req, res){
+      let status = req.query.status
 
+      Category
+        .findByPk(req.params.id)
+        .then(response => {
+          res.render('user/form_laundry', { isLogin : req.session.isLogin, status, paket : response })
+        })
+        .catch(err => {
+          res.send(err)
+        })
 
+    }
 }
 
 module.exports = UserController

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, { sequelize })
 
   Parfume.associate = function(models) {
-    // Parfume.hasMany(models.Category)
+    Parfume.hasMany(models.Category)
   };
   return Parfume;
 };

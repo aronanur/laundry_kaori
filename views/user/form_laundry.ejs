@@ -1,0 +1,46 @@
+
+<%- include('layouts/header') %>
+<%- include('layouts/navbar', { islogin : isLogin }) %>
+
+<br>
+<div class="col-md-10 mx-auto">
+    <% if(messages.error) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= messages.error %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <br>
+    <% } %>
+    <% if(status) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <%= status %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <br>
+    <% } %>
+          <h2>  Paket Laundry <%= paket.name %></h2>
+          <br>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="<%= paket.picture %>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <small class="card-text text-info text-center" style="font-weight: bold; font-size: 14px;"> <%= paket.name %></small>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-9">
+                    
+                  </div>
+            </div>
+        </div>
+
+</div>
+<br>
+
+<%- include('layouts/footer') %>
