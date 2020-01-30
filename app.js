@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.locals.formatRupiah = require('./helper/formatRupiah')
 app.locals.formatTanggal =require('./helper/formatTanggal')
-// app.locals.moment = require('moment')
+app.locals.moment = require('moment')
 app.use(flash())
 app.use(cookieParser('keyboard cat'))
 app.use(session({

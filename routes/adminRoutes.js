@@ -28,25 +28,27 @@ router.get('/listCategories', (req, res) => {
 })
 
 router.get('/addCategory', (req, res) => {
-    res.send('ini form add')
-})
-
-router.get('/addCategory', (req, res) => {
-    res.send('ini form add')
+    // res.send('ini form add')
+    CategoryController.showFormAdd(req,res)
 })
 
 router.post('/addCategory', (req, res) => {
-    res.send('ini ke add category')
+    // res.send('ini ke add category')
+    CategoryController.add(req,res)
 })
 router.get('/editCategory/:CategoryId', (req, res) => {
-    res.send('ini form ke edit')
-})
-router.post('/editCategory/:CategoryId', (req, res) => {
-    res.send('ini ke edit')
+    // res.send('ini form ke edit')
+    CategoryController.showFormEdit(req,res)
 })
 
-router.get('/delete/:CategoryId', (req, res) => {
-    res.send('ini delete aja')
+router.post('/editCategory/:CategoryId', (req, res) => {
+    // res.send('ini ke edit')
+    CategoryController.edit(req,res)
+})
+
+router.get('/deleteCategory/:CategoryId', (req, res) => {
+    // res.send('ini delete aja')
+    CategoryController.delete(req,res)
 })
 
 module.exports = router
