@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <title>Kaori Laundry</title>
+</head>
+
+<body>
+    <h1>Categories List</h1>
+
+    <!-- <div style="width: 30%;" class="form-group" action="/admins/filter" method='GET'>
+        <form>
+            <select class="custom-select" name="status">
+                <option value="Unhandled">Unhandled</option>
+                <option value="Pick Up">Pick Up</option>
+                <option value="Cleaning">Cleaning</option>
+                <option value="On Delivery">On Delivery</option>
+                <option value="Done">Done</option>
+            </select>
+            <input type="submit" value="Submit" class="btn btn-secondary">
+            <br>
+        </form>
+    </div> -->
+
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Duration</th>
+            <th>Fragrance</th>
+            <th>Rating</th>
+            <th>Action</th>
+        </tr>
+        <% categories.forEach(category=>{ %>
+        <tr>
+            <td><%= category.id%></td>
+            <td><%= category.name%></td>
+            <td><%= formatRupiah(category.price)%></td>
+            <td><%= category.duration%></td>
+            <td><%= category.Parfume.name%></td>
+            <td><%= category.rating%></td>
+            <td> <a href="/admins/deleteCategory/<%=category.id%>">Delete</a> |
+                <a href="/admins/editCategory/<%=category.id%>">Update</a> </td>
+        </tr>
+    </table>
+
+
+    <div class="container" style="margin-top: 100px;">
+        <div class="col-md-5 mx-auto">
+            <h1 class="text-center main-color"><b>Kaori</b> Laundry | Add Category</h1>
+            <br>
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input value="<%=category.name?category.name:''%>" type="text" class="form-control"
+                        id="exampleInputEmail1" name="name" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Price</label>
+                    <input value="<%=category.price?category.price:''%>" type="number" class="form-control" name="price"
+                        id="exampleInputEmail1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Duration</label>
+                    <input value="<%=category.duration?category.duration:''%>" type="number" class="form-control"
+                        name="duration" placeholder="Change total price" id="exampleInputEmail1">
+                </div>
+                
+                <p style="text-indent: 2px;" class="basic-color"><%= messages.error %></p>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

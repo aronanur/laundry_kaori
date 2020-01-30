@@ -1,19 +1,19 @@
 'use strict'
 const { Transaction } = require('../models')
 
-class AdminController {
-    static listTransactions(req, res) {
+class TransactionController {
+    static list(req, res) {
         Transaction
-            .findAll()
-            .then(transactions => {
+            .findAllWithFilter(req.query.status)
 
+            .then(transactions => {
                 res.render('admin/listTransactions', { transactions })
             })
             .catch(err => {
                 res.send(err)
             })
     }
-    static showFormEditTransaction(req, res) {
+    static showFormEdit(req, res) {
         Transaction
             .findOne({
                 where: {
@@ -28,7 +28,7 @@ class AdminController {
                 res.send(err)
             })
     }
-    static editTransaction(req, res) {
+    static edit(req, res) {
         console.log(req.body)
         Transaction
             .update(req.body, {
@@ -36,17 +36,15 @@ class AdminController {
                     pay_code: req.params.pay_code
                 },
                 hooks: false
-                // individualHooks:true
             })
             .then(transaction => {
                 res.redirect('/admins/listTransactions')
-                // res.send(transaction)
             })
             .catch(err => {
                 res.send(err)
             })
     }
-    static deleteTransaction(req, res) {
+    static delete(req, res) {
         Transaction
             .destroy({
                 where: {
@@ -62,4 +60,4 @@ class AdminController {
     }
 }
 
-module.exports = AdminController
+module.exports = TransactionController
