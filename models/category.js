@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
   }, { sequelize })
 
   Category.associate = function (models) {
-    Category.belongsToMany(models.User, { through: models.Transaction })
-    Category.belongsTo(models.Parfume)
-    Category.hasMany(models.Transaction)
+    // Category.belongsToMany(models.User, { through: models.Transaction })
+    // Category.belongsTo(models.Parfume)
+    // Category.hasMany(models.Transaction)
   };
   return Category;
 };
