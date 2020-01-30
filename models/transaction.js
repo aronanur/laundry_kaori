@@ -1,10 +1,12 @@
 'use strict';
 
 const Model = require('sequelize').Sequelize.Model
-const Category = require('../models').Category
+const Helper = require('../helper/helper')
 
 module.exports = (sequelize, DataTypes) => {
 
+  const Category = sequelize.models.Category
+  
   class Transaction extends Model {
     static findAllWithFilter(keyword) {
       if (keyword) {
@@ -60,34 +62,22 @@ module.exports = (sequelize, DataTypes) => {
     pay_code: DataTypes.STRING,
     notes: DataTypes.STRING
   }, {
-    sequelize,
     hooks: {
       beforeCreate: (instance, options) => {
-        instance.status = 'belum di proses'
-        instance.start_date = new Date()
-        instance.pay_code = Date.now().slice(0, 4) + 'categoryId' + instance.CategoryId
-        // console.log(instance)
-        Category
-          .findByPk(this.CategoryId)
-          .then(category => {
+        console.log(instance)
+        let start_date = new Date()
+        return Category
+        .findByPk(instance.CategoryId)
+        .then(category => {
+            instance.start_date = new Date()
+            instance.pay_code = Helper.generatePayCode(instance.CategoryId)
             instance.end_date = new Date(start_date.setDate(start_date.getDate() + category.duration))
+            // console.log(instance.end_date)
+            console.log(instance.qty * category.price, category.price, instance.qty)
             instance.total_price = (instance.qty * category.price)
           })
       }
-      // afterFind: (instances, options) => {
-      // instances.forEach(instance => {
-      //   instance.start_date = new Date()
-      //    Category
-      //      .findByPk(instance.CategoryId)
-      //      .then(category => {
-      //        instance.end_date = new Date(start_date.setDate(start_date.getDate() + category.duration))
-      //        instance.total_price = (instance.qty * category.price)
-      //      })
-      // console.log(instance)
-      // })
-      // instance.status = 'belum di proses'
-
-    }
+    }, sequelize
   })
 
   Transaction.associate = function (models) {

@@ -10,6 +10,10 @@ class Helper {
         return error
     }
 
+    static generatePayCode(id){
+        let date = Date.now().toString() + id
+        return date
+    }
 }
 
 module.exports = Helper
