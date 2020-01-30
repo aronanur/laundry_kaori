@@ -32,7 +32,9 @@
           </div>
           <br>
     <% } %>
-    <a href="#" type="button" class="btn main-bg-color text-light"><i class="fa fa-check-circle" aria-hidden="true"></i> Checkout All</a>
+    <% if(rows > 0){ %>
+    <a href="/laundry/checkoutInvoice/<%= user.id %>/multiple" type="button" class="btn main-bg-color text-light"><i class="fa fa-check-circle" aria-hidden="true"></i> Checkout All Belum Lunas</a>
+    <% } %>
     <table class="table table-striped mt-2">
     <thead class="text-center" style="font-size: 14px;">
       <tr>
@@ -57,12 +59,15 @@
         <td><%= paket.status %></td>
         <td><%= moment(paket.end_date).format('DD MMMM YYYY') %></td>
         <td>
-            <% if(paket.qty == 0){ %>
+            <% if(paket.status == 'Unhandled'){ %>
                 <a href="/laundry/updateDataTransaksi/<%= paket.pay_code %>/<%= paket.CategoryId %>" type="button" class="btn main-bg-color text-light btn-sm"><i class="fa fa-plus" aria-hidden="true"></i> Data</a>&nbsp;
-            <% }else{ %>
-                <a href="#" type="button" class="btn main-bg-color text-light btn-sm"><i class="fa fa-check-circle" aria-hidden="true"></i> Checkout</a>&nbsp;
+                <a onclick="return confirm('Apakah kamu yakin ingin menhapus data ini ?')" href="/laundry/deleteDataTransaksi/<%= paket.pay_code %>" type="button" class="btn second-bg-color text-light btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> </a>
+                <% }else if(paket.status == 'Belum Lunas'){ %>
+                    <a href="/laundry/checkoutInvoice/<%= paket.pay_code %>/single" type="button" class="btn main-bg-color text-light btn-sm"><i class="fa fa-check-circle" aria-hidden="true"></i> Checkout</a>&nbsp;
+                    <a onclick="return confirm('Apakah kamu yakin ingin menhapus data ini ?')" href="/laundry/deleteDataTransaksi/<%= paket.pay_code %>" type="button" class="btn second-bg-color text-light btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> </a>
+            <% }else if(paket.status == 'Invoice Terkirim'){ %>
+                <p class="text-warning">Menunggu Konfirmasi</p>
             <% } %>
-            <a onclick="return confirm('Apakah kamu yakin ingin menhapus data ini ?')" href="/laundry/deleteDataTransaksi/<%= paket.pay_code %>" type="button" class="btn second-bg-color text-light btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> </a>
         </td>
       </tr>
       <% }) %>

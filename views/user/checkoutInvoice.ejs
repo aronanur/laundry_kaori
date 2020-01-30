@@ -1,0 +1,78 @@
+
+<%- include('layouts/header') %>
+<%- include('layouts/navbar', { islogin : isLogin }) %>
+<br>
+<h2 class="text-center">Checkout Invoice</h2>
+<br>
+<div class="col-md-10 mx-auto">
+    <% if(messages.error) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= messages.error %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <br>
+    <% } %>
+    <% if(status) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <%= status %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <br>
+    <% } %>
+    <% if(messages.success) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <%= messages.success %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <br>
+    <% } %>
+    <table class="table table-striped mt-2">
+    <thead class="text-center" style="font-size: 14px;">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Kategori</th>
+        <th scope="col">Nama</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Harga</th>
+        <th scope="col">Status</th>
+        <th scope="col">Tanggal Selesai</th>
+      </tr>
+    </thead>
+    <tbody class="text-center" style="font-size: 12px;">
+    <% pakets.map((paket,index) => { %>
+      <tr>
+        <th scope="row"><%= index +1 %></th>
+        <td><%= paket.Category.name %></td>
+        <td><%= paket.User.name %></td>
+        <td><%= paket.qty %></td>
+        <td><%= formatRupiah(paket.total_price) %></td>
+        <td><%= paket.status %></td>
+        <td><%= moment(paket.end_date).format('DD MMMM YYYY') %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <h2>Total Harga : <%= formatRupiah(totals) %></h2>
+  <div class="col-md-4 mx-auto">
+      <br>
+    <p class="text-center">Masukan link bukti pembayaran dibawah ini</p>
+    <form action="/laundry/updateInvoiceStatus/<%= id %>/<%= statusData %>" method="POST">
+      <div class="form-group">
+          <label for="exampleInputEmail1">Link Invoice</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Link Invoice" name="invoice" aria-describedby="emailHelp">
+          </div>
+      <button type="submit" class="btn btn-primary text-light"><i class="fa fa-check" aria-hidden="true"></i> Bayar</button>
+    </form>
+  </div>
+
+</div>
+<br>
+
+<%- include('layouts/footer') %>

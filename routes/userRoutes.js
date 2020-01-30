@@ -20,6 +20,8 @@ router.get('/laundry/deleteDataTransaksi/:payCode', isLogin, userController.dele
 router.get('/laundry/:id', isLogin ,userController.addTransactionsPage)
 router.get('/laundry/addToCart/:UserId/:CategoryId', isLogin ,userController.addTransactionsToCart)
 router.post('/laundry/checkoutSingle/:UserId/:CategoryId', isLogin ,userController.checkoutSingleTransaction)
+router.get('/laundry/checkoutInvoice/:id/:statusData', isLogin, userController.checkoutInvoice)
+router.post('/laundry/updateInvoiceStatus/:id/:statusData', isLogin, userController.finalTransaksi)
 
 
 

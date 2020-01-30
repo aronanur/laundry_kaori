@@ -205,7 +205,9 @@ class UserController {
           }
         })
         .then(response => {
-          res.render('user/cartList', { pakets : response, isLogin : req.session.isLogin, status })
+          const checkoutValidasi = Helper.checkoutValidasi(response)
+          console.log(checkoutValidasi)
+          res.render('user/cartList', { pakets : response, isLogin : req.session.isLogin, status, rows : checkoutValidasi })
           // res.send(response)
         })
         .catch(err => {
@@ -239,13 +241,14 @@ class UserController {
         qty : req.body.qty,
         notes : req.body.notes,
         pay_code : pay_code,
-        total_price : 0
+        total_price : 0,
+        status : 'Belum Lunas'
       }
       
       Transaction
         .update(objValue, {
           where : {
-            pay_code : pay_code
+            pay_code : pay_code,
           },
           individualHooks: true
         })
@@ -273,6 +276,88 @@ class UserController {
           res.send(err)
         })
     }
+
+    static checkoutInvoice(req, res){
+      let statusData = req.params.statusData
+      let status =  req.query.status
+
+      if(statusData === 'single'){
+        Transaction
+        .findAll({
+          include : [User, Category],
+          where : {
+            pay_code : req.params.id
+          },
+        })
+        .then(response => {
+          let total = Helper.sumTotalPrice(response)
+          console.log(response[0].pay_code)
+          res.render('user/checkoutInvoice', { id : response[0].pay_code, pakets : response, isLogin : req.session.isLogin, status, totals : total, statusData : statusData })
+        })
+        .catch(err => {
+          res.send(err)
+        })
+      }else{
+        Transaction
+        .findAll({
+          include : [User, Category],
+          where : {
+            UserId : req.params.id,
+            status : 'Belum Lunas'
+          },
+          sum : 'total_price'
+        })
+        .then(response => {
+          let total = Helper.sumTotalPrice(response)
+          res.render('user/checkoutInvoice', { id : response[0].UserId,  pakets : response, isLogin : req.session.isLogin, status, totals : total, statusData : statusData })
+        })
+        .catch(err => {
+          res.send(err)
+        })
+      }
+    }
+
+    static finalTransaksi(req, res){
+      let statusData = req.params.statusData
+      let status =  req.query.status
+
+      let objValue = {
+        status : 'Invoice Terkirim',
+        invoice : req.body.invoice
+      }
+
+      if(statusData === 'single'){
+        Transaction
+          .update(objValue, {
+            where : {
+              pay_code : req.params.id
+            },
+            hooks : false
+          })
+          .then(response => {
+            res.render('user/success', { isLogin : req.session.isLogin })
+          })
+          .catch(err => {
+            res.send(err)
+          })
+      }else{
+        Transaction
+          .update(objValue, {
+            where : {
+              UserId : req.params.id,
+              status : 'Belum Lunas'
+            },
+            hooks : false
+          })
+          .then(response => {
+            res.render('user/success', { isLogin : req.session.isLogin })
+          })
+          .catch(err => {
+            res.send(err)
+          })
+      }
+    }
+    
 }
 
 module.exports = UserController
