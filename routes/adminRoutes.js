@@ -1,33 +1,34 @@
 const express = require('express')
 const router = express.Router()
-const adminController = require('../controllers/adminController')
+const TransactionController = require('../controllers/transactionController')
+const CategoryController=require('../controllers/categoryController')
 
-//liat list transaction, filter status
+//filter status
 
 router.get('/', (req, res) => {
     res.send('ini ke home page')
 })
 
 router.get('/listTransactions', (req, res) => {
-    adminController.listTransactions(req, res)
-})
-router.get('/filter?',(req,res)=>{
-    res.send('ini filter')
+    TransactionController.list(req, res)
 })
 
 router.get('/editTransaction/:pay_code', (req, res) => {
-   
-    adminController.showFormEditTransaction(req,res)
+
+    TransactionController.showFormEdit(req, res)
 })
 router.post('/editTransaction/:pay_code', (req, res) => {
-   
-    adminController.editTransaction(req,res)
+
+    TransactionController.edit(req, res)
 })
 
-router.get('/deleteTransaction/:pay_code',(req,res)=>{
-    // res.send('ini delete trans')
-    adminController.deleteTransaction(req,res)
-    
+router.get('/listCategories', (req, res) => {
+    // res.send('ini list cat')
+    CategoryController.list(req, res)
+})
+
+router.get('/addCategory', (req, res) => {
+    res.send('ini form add')
 })
 
 router.get('/addCategory', (req, res) => {

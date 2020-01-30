@@ -5,7 +5,21 @@ const Category = require('../models').Category
 
 module.exports = (sequelize, DataTypes) => {
 
-  class Transaction extends Model { }
+  class Transaction extends Model {
+    static findAllWithFilter(keyword) {
+      if (keyword) {
+        return this.findAll({
+          where: {
+            status: keyword
+          }
+        }
+        )
+      }
+      else {
+        return this.findAll()
+      }
+    }
+  }
 
   Transaction.init({
     UserId: DataTypes.INTEGER,
@@ -43,7 +57,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,
-    pay_code: DataTypes.STRING
+    pay_code: DataTypes.STRING,
+    notes: DataTypes.STRING
   }, {
     sequelize,
     hooks: {

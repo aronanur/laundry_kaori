@@ -20,6 +20,7 @@ module.exports = {
         qty: 2,
         total_price: 30000,
         start_date: new Date(),
+        pay_code:'09876',
         end_date: new Date(),
         createdAt: new Date(),
         updatedAt: new Date()
@@ -30,6 +31,7 @@ module.exports = {
         status: 'belum di proses',
         qty: 3,
         total_price: 35000,
+        pay_code:'09886',
         start_date: new Date(),
         end_date: new Date(),
         createdAt: new Date(),
@@ -41,6 +43,7 @@ module.exports = {
         status: 'belum di proses',
         qty: 4,
         total_price: 20000,
+        pay_code:'01216',
         start_date: new Date(),
         end_date: new Date(),
         createdAt: new Date(),
