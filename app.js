@@ -1,9 +1,10 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 5000
 const flash = require('express-flash')
 const cookieParser = require('cookie-parser')
-const session = require('express.session')
+const session = require('express-session')
+const userRoutes = require('./routes/userRoutes')
 
 app.use(express.static('assets'))
 app.use(express.json())
@@ -15,8 +16,8 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
   }))
-app.use(session())
 app.set('view engine', 'ejs')
+app.use('/', userRoutes)
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
