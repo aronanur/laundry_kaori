@@ -1,54 +1,37 @@
 const express = require('express')
 const router = express.Router()
 const TransactionController = require('../controllers/transactionController')
-const CategoryController=require('../controllers/categoryController')
-
-//filter status
+const CategoryController = require('../controllers/categoryController')
+const AdminController = require('../controllers/adminController')
+const alreadyLogin = require('../middlewares/alreadyLogin')
+// const isLogin = require('../middlewares/isLoggedIn')
+const isAdmin = require('../middlewares/isAdmin')
 
 router.get('/', (req, res) => {
-    res.send('ini ke home page')
+    res.send('homeeee')
 })
+// router.get('/logout', AdminController.doLogout)
+// router.get('/login', alreadyLogin, AdminController.loginPage)
+// router.post('/login', alreadyLogin, AdminController.doLogin)
 
-router.get('/listTransactions', (req, res) => {
-    TransactionController.list(req, res)
-})
+// router.use(isAdmin)
 
-router.get('/editTransaction/:pay_code', (req, res) => {
+router.get('/listTransactions', TransactionController.list)
 
-    TransactionController.showFormEdit(req, res)
-})
-router.post('/editTransaction/:pay_code', (req, res) => {
+router.get('/editTransaction/:pay_code', TransactionController.showFormEdit)
+router.post('/editTransaction/:pay_code', TransactionController.edit)
+router.get('/deleteTransaction/:pay_code', TransactionController.delete)
 
-    TransactionController.edit(req, res)
-})
 
-router.get('/listCategories', (req, res) => {
-    // res.send('ini list cat')
-    CategoryController.list(req, res)
-})
+router.get('/listCategories', CategoryController.list)
 
-router.get('/addCategory', (req, res) => {
-    // res.send('ini form add')
-    CategoryController.showFormAdd(req,res)
-})
+router.get('/addCategory', CategoryController.showFormAdd)
 
-router.post('/addCategory', (req, res) => {
-    // res.send('ini ke add category')
-    CategoryController.add(req,res)
-})
-router.get('/editCategory/:CategoryId', (req, res) => {
-    // res.send('ini form ke edit')
-    CategoryController.showFormEdit(req,res)
-})
+router.post('/addCategory', CategoryController.add)
+router.get('/editCategory/:CategoryId', CategoryController.showFormEdit)
 
-router.post('/editCategory/:CategoryId', (req, res) => {
-    // res.send('ini ke edit')
-    CategoryController.edit(req,res)
-})
+router.post('/editCategory/:CategoryId', CategoryController.edit)
 
-router.get('/deleteCategory/:CategoryId', (req, res) => {
-    // res.send('ini delete aja')
-    CategoryController.delete(req,res)
-})
+router.get('/deleteCategory/:CategoryId', CategoryController.delete)
 
 module.exports = router

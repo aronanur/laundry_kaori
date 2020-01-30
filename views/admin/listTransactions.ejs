@@ -46,8 +46,8 @@
             <td><%= transaction.CategoryId%></td>
             <td><%= transaction.qty%></td>
             <td><%= formatRupiah(transaction.total_price)%></td>
-            <td><%= transaction.start_date%></td>
-            <td><%= transaction.end_date%></td>
+            <td><%= moment(transaction.start_date).format('DD MMMM YYYY')%></td>
+            <td><%= moment(transaction.end_date).format('DD MMMM YYYY')%></td>
             <td><%= transaction.status%></td>
             <% if(transaction.status==="Done"){%>
             <td> <a href="/admins/deleteTransaction/<%=transaction.pay_code%>">Delete</a> </td>

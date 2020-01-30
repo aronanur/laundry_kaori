@@ -1,0 +1,60 @@
+
+<%- include('user/layouts/header') %>
+<%- include('user/layouts/navbar') %>
+<%- include('user/layouts/jumbotron') %>
+
+<h2 class="text-center">Pilih paket laundry yang kamu mau</h2>
+<br>
+<div class="col-md-8 mx-auto">
+    <% if(messages.error) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= messages.error %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <br>
+    <% } %>
+          </div>
+          <br>
+    <% } %>
+    
+    <form action="/laundry/list" method="GET">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="name" placeholder="Cari berdasarkan nama paket" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button type="submit" class="btn main-bg-color text-light">Cari Paket</button>
+          </div>
+        </div>
+      </form>
+      <br>
+
+      <div class="col-md-12">
+          <p>Paket Terbaik Kami : </p>
+          <div class="row">
+              <% pakets.map(paket => { %>
+              <div class="col-md-3">
+                <div class="card">
+                    <img src="<%= paket.picture %>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <small class="card-text text-info" style="font-weight: bold;"><i class="fa fa-tags" aria-hidden="true"></i> <%= paket.name %></small>
+                      <small class="card-text text-info" style="font-weight: bold; font-size: 14px;"><i class="fa fa-flask" aria-hidden="true"></i> <%= paket.Parfume.name %></small>
+                      <small class="card-text"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= paket.duration %> Hari</small>
+                      <small class="card-text text-info pb-2"> <%= formatRupiah(paket.price) %>/pcs</small>
+                      <% if(isLogin){ %>
+                        <a href="/laundry/addToCart/<%= user.id %>/<%= paket.id %>" class="btn orange-bg-color btn-sm text-light card-btn" type="button"><i class="fa fa-plus" aria-hidden="true"></i> Cart</a> &nbsp;
+                        <a href="/laundry/<%= paket.id %>" class="btn main-bg-color text-light btn-sm card-btn" type="button"> Detail</a> &nbsp;
+                      <% }else{ %>
+                        <p class="text-danger">Login untuk transaksi!</p>
+                      <% } %>
+                    </div>
+                  </div>
+              </div>
+              <% }) %>
+          </div>
+      </div>
+
+</div>
+<br>
+
+<%- include('layouts/footer') %>
