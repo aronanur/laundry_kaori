@@ -37,6 +37,7 @@
             <th>Price</th>
             <th>Start Date</th>
             <th>End Date</th>
+            <th>Invoice</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -48,9 +49,16 @@
             <td><%= formatRupiah(transaction.total_price)%></td>
             <td><%= moment(transaction.start_date).format('DD MMMM YYYY')%></td>
             <td><%= moment(transaction.end_date).format('DD MMMM YYYY')%></td>
+            <% if(transaction.invoice){%>
+            <td> <a href="<%= transaction.invoice%>">Check Invoice Here</a></td>
+            <% } else{%>
+            <td>Waiting for Payment</td>
+            <%}%>
             <td><%= transaction.status%></td>
             <% if(transaction.status==="Done"){%>
             <td> <a href="/admins/deleteTransaction/<%=transaction.pay_code%>">Delete</a> </td>
+            <%}else if(!transaction.invoice){%>
+            <td> Can't Update </td>
             <%}else{%>
             <td> <a href="/admins/editTransaction/<%=transaction.pay_code%>">Update</a> </td>
             <% }}) %>

@@ -22,9 +22,10 @@ class AdminController {
                 req.session.admin = {
                     id: response.id,
                     email: response.email,
-                    // role: 'admin',
+                    role: 'admin',
                     isLogin: true
                 }
+                console.log(req.session.admin)
                 res.redirect('/admins')
             })
             .catch(err => {

@@ -7,16 +7,17 @@ const alreadyLogin = require('../middlewares/alreadyLogin')
 // const isLogin = require('../middlewares/isLoggedIn')
 const isAdmin = require('../middlewares/isAdmin')
 
+router.get('/logout', AdminController.doLogout)
+router.get('/login', alreadyLogin, AdminController.loginPage)
+router.post('/login', alreadyLogin, AdminController.doLogin)
+
+router.use('/',isAdmin)
+
 router.get('/', (req, res) => {
     // res.send('homeeee
     res.render('admin/homeAdmin')
 })
 
-// router.get('/logout', AdminController.doLogout)
-// router.get('/login', alreadyLogin, AdminController.loginPage)
-// router.post('/login', alreadyLogin, AdminController.doLogin)
-
-// router.use(isAdmin)
 
 router.get('/listTransactions', TransactionController.list)
 
