@@ -18,6 +18,7 @@
             <a href="/login" class="btn btn-info standard-btn-width btn-sm" type="button"><i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp; Login</a> &nbsp;
             <a href="/register" class="btn second-bg-color standard-btn-width text-light btn-sm" type="button"><i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp; Register</a> &nbsp;
         <% }else{ %>
+          <a href="/laundry/carts/<%= user.id %>" class="btn orange-bg-color text-light btn-sm card-btn" type="button"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a> &nbsp;
             <a href="/logout" class="btn second-bg-color btn-sm text-light" type="button"><i class="fa fa-user" aria-hidden="true"></i> &nbsp;<%= user.email %> | Logout</a> &nbsp;
         <% } %>
       </div>

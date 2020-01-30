@@ -5,7 +5,6 @@ module.exports = {
 
     return queryInterface.bulkInsert('Users', [
       {
-        id: 1,
         name: 'Isni',
         address: 'Tanah Kusir',
         phone: '081234568',
@@ -16,7 +15,6 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        id: 2,
         name: 'Arona',
         address: 'Palmerah',
         phone: '0813334455',

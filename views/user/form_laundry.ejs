@@ -22,7 +22,16 @@
           </div>
           <br>
     <% } %>
-          <h2>  Paket Laundry <%= paket.name %></h2>
+    <% if(messages.success) { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= messages.success %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <br>
+  <% } %>
+          <h2> <i class="fa fa-tags" aria-hidden="true"></i> Paket Laundry <%= paket.name %></h2>
           <br>
         <div class="col-md-10">
             <div class="row">
@@ -30,12 +39,33 @@
                     <div class="card">
                         <img src="<%= paket.picture %>" class="card-img-top" alt="...">
                         <div class="card-body">
-                          <small class="card-text text-info text-center" style="font-weight: bold; font-size: 14px;"> <%= paket.name %></small>
+                            <small class="card-text text-info" style="font-weight: bold;"><i class="fa fa-tags" aria-hidden="true"></i> <%= paket.name %></small>
+                            <small class="card-text text-info" style="font-weight: bold; font-size: 14px;"><i class="fa fa-flask" aria-hidden="true"></i> <%= paket.Parfume.name %></small>
+                            <small class="card-text"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= paket.duration %> Hari</small>
+                            <small class="card-text text-info pb-2"> <%= formatRupiah(paket.price) %>/pcs</small>
                         </div>
                       </div>
                   </div>
                   <div class="col-md-9">
-                    
+                      <p>Paket ini menggunakan parfume <b>'<%= paket.Parfume.name %>'</b></p>
+                    <% if(isLogin){ %>
+                      <div class="col-md-10">
+                        <form action="/laundry/checkoutSingle/<%= user.id %>/<%= paket.id %>" method="POST">
+                          <div class="form-group">
+                              <label for="exampleInputEmail1">Quantity</label>
+                              <input type="number" class="form-control" value="0" id="exampleInputEmail1" placeholder="Quantity" name="qty" aria-describedby="emailHelp">
+                              </div>
+                              <div class="form-group">
+                                  <label for="exampleInputPassword1">Pesan</label>
+                                  <textarea class="form-control" rows="6" name="notes" placeholder="Masukan pesan tambahan kepada toko"></textarea>
+                          </div>
+                          <a href="/laundry/addToCart/<%= user.id %>/<%= paket.id %>" class="btn btn-sm orange-bg-color text-light"><i class="fa fa-plus" aria-hidden="true"></i> Add To Cart</a>
+                          <button type="submit" class="btn btn-sm btn-primary text-light"><i class="fa fa-plus" aria-hidden="true"></i> Checkout</button>
+                        </form>
+                      </div>
+                    <% }else{ %>
+                      <h2 class="text-center text-danger">Harap login untuk bisa melakukan transaksi</h2>
+                    <% } %>
                   </div>
             </div>
         </div>

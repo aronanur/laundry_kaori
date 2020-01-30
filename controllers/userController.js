@@ -1,6 +1,7 @@
 const { User, Category, Parfume, Transaction } = require('../models/index')
+const Operator = require('sequelize').Sequelize.Op
 const Helper = require('../helper/helper')
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs')
 
 class UserController {
 
@@ -9,7 +10,10 @@ class UserController {
       let status = req.query.status
 
       Category
-        .findAll()
+        .findAll({
+          include : Parfume,
+          limit : 4
+        })
         .then(response => {
           res.render('user/home', { isLogin : req.session.isLogin, status, pakets : response })
         })
@@ -94,15 +98,104 @@ class UserController {
       let status = req.query.status
 
       Category
-        .findByPk(req.params.id)
+        .findOne({
+          include : Parfume,
+          where : {
+            id : req.params.id
+          }
+        })
         .then(response => {
+          // res.send(response)
           res.render('user/form_laundry', { isLogin : req.session.isLogin, status, paket : response })
         })
         .catch(err => {
           res.send(err)
         })
-
     }
+
+    static addTransactionsToCart(req, res){
+      let objValue = {
+        UserId : req.params.UserId,
+        CategoryId : req.params.CategoryId,
+        status : 'Unhandled',
+        qty : 0,
+        total_price : 0,
+        pay_code : '',
+        start_date: '',
+        end_date: '',
+      }
+
+      Transaction
+        .create(objValue)
+        .then(response => {
+          req.flash('success', 'Berhasil memasukan data transaksi ke cart!')
+          res.redirect('/laundry/'+req.params.CategoryId)
+        })
+        .catch(err => {
+          res.send(err)
+        })
+    }
+
+    static checkoutSingleTransaction(req, res){
+      let objValue = {
+        UserId : req.params.UserId,
+        CategoryId : req.params.CategoryId,
+        status : 'Belum Lunas',
+        qty : req.body.qty,
+        notes : req.body.notes,
+        total_price : 0,
+        pay_code : '',
+        start_date: '',
+        end_date: '',
+      }
+
+      Transaction
+      .create(objValue)
+      .then(response => {
+        req.flash('success', 'Berhasil checkout transaksi')
+        res.redirect('/laundry/'+req.params.CategoryId)
+      })
+      .catch(err => {
+        res.send(err)
+      })
+    }
+
+    static paketList(req, res){
+      let query = req.query.name
+
+      if(!query){
+        Category
+        .findAll({
+          include : Parfume
+        })
+        .then(response => {
+          res.render('user/paketList', { isLogin : req.session.isLogin, pakets : response })
+        })
+        .catch(err => {
+          res.send(err)
+        })
+      }else{
+        Category
+        .findAll({
+          include : Parfume,
+          where : {
+            name : {
+              [Operator.like] : `%${query}%`
+            }
+          }
+        })
+        .then(response => {
+          res.render('user/paketList', { isLogin : req.session.isLogin, pakets : response })
+        })
+        .catch(err => {
+          res.send(err)
+        })
+      }
+    }
+
+    // static cartList(req, res){
+    //   Category
+    // }
 }
 
 module.exports = UserController

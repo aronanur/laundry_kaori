@@ -14,19 +14,16 @@ module.exports = {
     */
     return queryInterface.bulkInsert('Parfumes', [
       {
-        id: 1,
         name: 'Green Tea',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        id: 2,
         name: 'Strawberry',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        id: 3,
         name: 'Mint',
         createdAt: new Date(),
         updatedAt: new Date()

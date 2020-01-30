@@ -1,37 +1,18 @@
 
 <%- include('layouts/header') %>
 <%- include('layouts/navbar', { islogin : isLogin }) %>
-<%- include('layouts/jumbotron') %>
-
-<h2 class="text-center">Pilih paket laundry yang kamu mau</h2>
+<br>
+<h2 class="text-center">List Paket</h2>
 <br>
 <div class="col-md-8 mx-auto">
-    <% if(messages.error) { %>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <%= messages.error %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <br>
-    <% } %>
-    <% if(status) { %>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <%= status %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <br>
-    <% } %>
     <form action="/laundry/list" method="GET">
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" name="name" placeholder="Cari berdasarkan nama paket" aria-label="Recipient's username" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button type="submit" class="btn main-bg-color text-light">Cari Paket</button>
-          </div>
-        </div>
-      </form>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="name" placeholder="Cari berdasarkan nama paket" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button type="submit" class="btn main-bg-color text-light">Cari Paket</button>
+              </div>
+            </div>
+          </form>
       <br>
 
       <div class="col-md-12">
@@ -49,9 +30,9 @@
                       <% if(isLogin){ %>
                         <a href="/laundry/addToCart/<%= user.id %>/<%= paket.id %>" class="btn orange-bg-color btn-sm text-light card-btn" type="button"><i class="fa fa-plus" aria-hidden="true"></i> Cart</a> &nbsp;
                         <a href="/laundry/<%= paket.id %>" class="btn main-bg-color text-light btn-sm card-btn" type="button"> Detail</a> &nbsp;
-                      <% }else{ %>
-                        <p class="text-danger">Login untuk transaksi!</p>
-                      <% } %>
+                        <% }else{ %>
+                            <p class="text-danger">Login untuk transaksi!</p>
+                          <% } %>
                     </div>
                   </div>
               </div>
