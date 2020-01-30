@@ -12,7 +12,10 @@ router.post('/login', alreadyLogin,userController.doLogin)
 router.get('/register', alreadyLogin,userController.registerPage)
 router.post('/register', alreadyLogin,userController.doRegister)
 
+router.get('/laundry/list' ,userController.paketList)
 router.get('/laundry/:id', isLogin ,userController.addTransactionsPage)
+router.get('/laundry/addToCart/:UserId/:CategoryId', isLogin ,userController.addTransactionsToCart)
+router.post('/laundry/checkoutSingle/:UserId/:CategoryId', isLogin ,userController.checkoutSingleTransaction)
 
 
 
