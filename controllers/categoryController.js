@@ -5,13 +5,12 @@ const Helper = require('../helper/helper')
 class CategoryController {
     static list(req, res) {
         Category
-            // .findAllWithFilter(req.query.status)
+
             .findAll({
                 include: Parfume
             })
-            // Parfume.findAll()
             .then(categories => {
-                // res.send(categories)
+
                 res.render('admin/listCategories', { categories })
             })
             .catch(err => {
@@ -22,7 +21,7 @@ class CategoryController {
         Parfume
             .findAll()
             .then(parfumes => {
-                // res.send(parfume)
+
                 res.render('admin/addCategory', { category: {}, parfumes, errMsg: [] })
             })
             .catch(err => {
@@ -46,7 +45,7 @@ class CategoryController {
 
         Promise.all([Category.findByPk(req.params.CategoryId), Parfume.findAll()])
             .then(data => {
-                console.log(data)
+
                 res.render('admin/editCategory', { category: data[0], parfumes: data[1], errMsg: [] })
             })
 
@@ -55,7 +54,7 @@ class CategoryController {
             })
     }
     static edit(req, res) {
-        console.log(req.body)
+
         Category
             .update(req.body, {
                 where: {
@@ -71,7 +70,7 @@ class CategoryController {
             })
     }
     static delete(req, res) {
-        console.log(req.params.CategoryId)
+
         Category
             .destroy({
                 where: {
