@@ -47,8 +47,6 @@
             <td><%= transaction.status%></td>
             <% if(transaction.status==="Done"){%>
             <td> <a href="/admins/deleteTransaction/<%=transaction.pay_code%>">Delete</a> </td>
-            <%}else if(!transaction.invoice){%>
-            <td> Can't Update </td>
             <%}else{%>
             <td> <a href="/admins/editTransaction/<%=transaction.pay_code%>">Update</a> </td>
             <% }}) %>
