@@ -79,22 +79,19 @@ class UserController {
           .create(objValue)
           .then(response => {
             mailSetup
-                  // setup email data with unicode symbols
-            let mailOptions = {
-              from: '"Nodemailer Contact" <kaorilaundry8@email.com>', // sender address
-              to: 'arona.nur.tetulis@gmail.com', // list of receivers
-              subject: 'Tes', // Subject line
-              text: 'Hello world?', // plain text body
-              html: 'tes email' // html body
-            };
-            // send mail with defined transport object
+              let mailOptions = {
+                from: '"Kaori Laundry" <kaorilaundry8@email.com>', // sender address
+                to: req.body.email, // list of receivers
+                subject: 'Selamat anda terdaftar di Kaori Laundry', // Subject line
+                text: `Selamat ${name} kamu sudah terdaftar di kaory Laundry`, // plain text body
+                html: 'Selamat ${name} kamu sudah terdaftar di kaory Laundry' // html body
+              };
             mailSetup.sendMail(mailOptions, (error, info) => {
                 if (error) {
                     return console.log(error);
                 }
                 console.log('Message sent: %s', info.messageId);
                 console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-              //   res.render('contact', {msg:'Email has been sent'});
             });
             req.flash('success', 'Sukses membuat akun Kaori Laundry')
             res.redirect('/login')
