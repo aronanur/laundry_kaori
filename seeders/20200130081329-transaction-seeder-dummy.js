@@ -16,7 +16,7 @@ module.exports = {
       {
         UserId: 1,
         CategoryId: 1,
-        status: 'belum di proses',
+        status: 'Unhandled',
         qty: 2,
         total_price: 30000,
         start_date: new Date(),
@@ -28,7 +28,7 @@ module.exports = {
       {
         UserId: 1,
         CategoryId: 2,
-        status: 'belum di proses',
+        status: 'Unhandled',
         qty: 3,
         total_price: 35000,
         pay_code:'09886',
@@ -40,7 +40,7 @@ module.exports = {
       {
         UserId: 2,
         CategoryId: 1,
-        status: 'belum di proses',
+        status: 'Pick Up',
         qty: 4,
         total_price: 20000,
         pay_code:'01216',
