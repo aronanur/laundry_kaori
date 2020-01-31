@@ -1,5 +1,6 @@
 'use strict'
 const { Transaction } = require('../models')
+const mailSetup=require('../helper/mailSetup')
 
 class TransactionController {
     static list(req, res) {
@@ -38,6 +39,25 @@ class TransactionController {
                 hooks: false
             })
             .then(transaction => {
+                mailSetup
+                  // setup email data with unicode symbols
+            let mailOptions = {
+              from: '"Nodemailer Contact" <kaorilaundry8@email.com>', // sender address
+              to: 'isnirof.ir@gmail.com', // list of receivers
+              subject: 'Tes', // Subject line
+              text: 'We have update your laundry status', // plain text body
+              html: 'tes email' // html body
+            };
+            // send mail with defined transport object
+            mailSetup.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: %s', info.messageId);
+                console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+              //   res.render('contact', {msg:'Email has been sent'});
+            });
+            req.flash('success', 'Berhasil update transaksi')
                 res.redirect('/admins/listTransactions')
             })
             .catch(err => {
@@ -52,6 +72,7 @@ class TransactionController {
                 }
             })
             .then(() => {
+                req.flash('success', 'Berhasil hapus transaksi')
                 res.redirect('/admins/listTransactions')
             })
             .catch(err => {

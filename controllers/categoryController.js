@@ -33,6 +33,7 @@ class CategoryController {
         Category
             .create(req.body)
             .then(category => {
+                req.flash('success', 'Berhasil menambah kategori')
                 res.redirect('/admins/listCategories')
             })
             .catch(err => {
@@ -45,7 +46,6 @@ class CategoryController {
 
         Promise.all([Category.findByPk(req.params.CategoryId), Parfume.findAll()])
             .then(data => {
-
                 res.render('admin/editCategory', { category: data[0], parfumes: data[1], errMsg: [] })
             })
 
@@ -62,6 +62,7 @@ class CategoryController {
                 },
             })
             .then(category => {
+                req.flash('success', 'Berhasil update kategori')
                 res.redirect('/admins/listCategories')
             })
             .catch(err => {
@@ -78,6 +79,7 @@ class CategoryController {
                 }
             })
             .then(category => {
+                req.flash('success', 'Berhasil hapus kategori')
                 res.redirect('/admins/listCategories')
             })
             .catch(err => {
