@@ -8,7 +8,7 @@ class AdminController {
     }
 
     static doLogin(req, res) {
-        console.log(req.body)
+        // console.log(req.body)
         let email = req.body.email
         let password = req.body.password
         User
