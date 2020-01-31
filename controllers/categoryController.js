@@ -78,7 +78,7 @@ class CategoryController {
                     id: Number(req.params.CategoryId)
                 }
             })
-            .then(category => {
+            .then(() => {
                 req.flash('success', 'Berhasil hapus kategori')
                 res.redirect('/admins/listCategories')
             })
