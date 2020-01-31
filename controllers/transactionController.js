@@ -71,7 +71,6 @@ class TransactionController {
                 }
             })
             .then(() => {
-                req.flash('success', 'Berhasil hapus transaksi')
                 res.redirect('/admins/listTransactions')
             })
             .catch(err => {
