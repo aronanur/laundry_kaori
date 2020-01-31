@@ -1,45 +1,33 @@
-<!doctype html>
-<html lang="en">
+<%- include('./partials/header') %>
+<%- include('./partials/navbar') %>
+<br>
+<h2 class="text-center">categories List</h2>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <title>Kaori Laundry</title>
-</head>
-
-<body>
-    <h1>Categories List</h1>
-    <a href="/admins/addCategory"class="btn btn-outline-primary ">Add Category</a>
+    <a href="/admins/addCategory"style="font-size: 12px;" class="btn btn-secondary">Add Category</a>
     <br><br>
-    <table class="table table-striped">
+    <table class="table table-striped mt-2" style="width: 80%; margin-left: 135px;">
+        <thead class="text-center" style="font-size: 14px;">
         <tr>
             <th>Id</th>
             <th>Name</th>
             <th>Price</th>
             <th>Duration</th>
             <th>Fragrance</th>
-            <th>Rating</th>
             <th>Action</th>
         </tr>
         <% categories.forEach(category=>{ %>
+            <tbody class="text-center" style="font-size: 12px;">
         <tr>
             <td><%= category.id%></td>
             <td><%= category.name%></td>
             <td><%= formatRupiah(category.price)%></td>
             <td><%= category.duration%> day(s)</td>
             <td><%= category.Parfume.name%></td>
-            <td><%= category.rating%></td>
             <td> <a href="/admins/deleteCategory/<%=category.id%>">Delete</a> |
                 <a href="/admins/editCategory/<%=category.id%>">Update</a> </td>
         </tr>
+        </tbody>
         <%})%>
     </table>
 
-</body>
-
-</html>
+    <%- include('../user/layouts/footer') %>

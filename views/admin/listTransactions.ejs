@@ -1,35 +1,23 @@
-<!doctype html>
-<html lang="en">
+<%- include('./partials/header') %>
+<%- include('./partials/navbar') %>
+<br>
+<h2 class="text-center">Transactions List</h2>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <title>Kaori Laundry</title>
-</head>
+<div style="width: 10%; margin-left: 135px;" class="form-group" action="/admins/filter" method='GET'>
+    <form>
+        <select class="custom-select text-center" name="status"  style="font-size: 12px;">
+            <option value="Unhandled">Unhandled</option>
+            <option value="Pick Up">Pick Up</option>
+            <option value="Cleaning">Cleaning</option>
+            <option value="On Delivery">On Delivery</option>
+            <option value="Done">Done</option>
+        </select> <input type="submit" value="Filter by Status" style="font-size: 12px;" class="btn btn-secondary">
+        
+    </form>
+</div>
 
-<body>
-    <h1>Transactions List</h1>
-
-    <div style="width: 30%;" class="form-group" action="/admins/filter" method='GET'>
-        <form>
-            <select class="custom-select" name="status">
-                <option value="Unhandled">Unhandled</option>
-                <option value="Pick Up">Pick Up</option>
-                <option value="Cleaning">Cleaning</option>
-                <option value="On Delivery">On Delivery</option>
-                <option value="Done">Done</option>
-            </select>
-            <input type="submit" value="Submit" class="btn btn-secondary">
-            <br>
-        </form>
-    </div>
-
-    <table class="table table-striped">
+<table class="table table-striped mt-2" style="width: 80%; margin-left: 135px;">
+    <thead class="text-center" style="font-size: 14px;">
         <tr>
             <th>UserId</th>
             <th>CategoryId</th>
@@ -41,7 +29,9 @@
             <th>Status</th>
             <th>Action</th>
         </tr>
-        <% transactions.forEach(transaction=>{ %>
+    </thead>
+    <% transactions.forEach(transaction=>{ %>
+    <tbody class="text-center" style="font-size: 12px;">
         <tr>
             <td><%= transaction.UserId%></td>
             <td><%= transaction.CategoryId%></td>
@@ -63,8 +53,7 @@
             <td> <a href="/admins/editTransaction/<%=transaction.pay_code%>">Update</a> </td>
             <% }}) %>
         </tr>
-    </table>
+    </tbody>
+</table>
 
-</body>
-
-</html>
+<%- include('../user/layouts/footer') %>
