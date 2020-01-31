@@ -5,5 +5,12 @@
     "database": "laundryKaori",
     "host": "127.0.0.1",
     "dialect": "postgres"
+  },
+  "productions" : {
+    "username": "tjlbddrilcwqqy",
+    "password": "631b7d5b7b6a80ba5594605e7c05d82c7c1de828459e7d663864b72a4d4715a3",
+    "database": "dfdeq1hvk3gd3s",
+    "host": "ec2-54-174-229-152.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }
